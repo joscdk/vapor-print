@@ -3,7 +3,8 @@ import Vapor
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
     // Basic "It works" example
-    router.get { req in
+    router.get { req -> String in
+        printAndFlush("Foobar")
         return "It works!"
     }
     
@@ -17,4 +18,10 @@ public func routes(_ router: Router) throws {
     router.get("todos", use: todoController.index)
     router.post("todos", use: todoController.create)
     router.delete("todos", Todo.parameter, use: todoController.delete)
+}
+
+func printAndFlush(_ items: Any) {
+    print(items)
+    fflush(stdout)
+    fflush(stderr)
 }
